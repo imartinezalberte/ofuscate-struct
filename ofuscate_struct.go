@@ -21,7 +21,10 @@ func Ofuscate(input any, filter string) map[string]any {
 func DoOfuscate(input map[string]any, filter string) {
 	actual, after, ok := strings.Cut(filter, ".")
 	if !ok { // last one
-		input[strings.Split(actual, "[")[0]] = "XXX"
+		propertyName := strings.Split(actual, "[")[0]
+		if _, ok := input[propertyName]; ok {
+			input[propertyName] = "XXX"
+		}
 		return
 	}
 
