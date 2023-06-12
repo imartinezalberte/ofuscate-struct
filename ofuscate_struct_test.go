@@ -774,81 +774,91 @@ var _ = Describe("OfuscateStruct", func() {
 
 		When("Ofuscating C.CA on second level of nesting", func() {
 			It("Ofuscating First", func() {
-				Expect(Ofuscate(input, "CA.First")["CA"]).
+				Expect(Ofuscate(input, "CA.First").(map[string]interface{})["CA"]).
 					To(HaveKeyWithValue("First", "XXX"))
 			})
 
 			It("Ofuscating Second", func() {
-				Expect(Ofuscate(input, "CA.Second")["CA"]).
+				Expect(Ofuscate(input, "CA.Second").(map[string]interface{})["CA"]).
 					To(HaveKeyWithValue("Second", "XXX"))
 			})
 
 			It("Ofuscating Third", func() {
-				Expect(Ofuscate(input, "CA.Third")["CA"]).
+				Expect(Ofuscate(input, "CA.Third").(map[string]interface{})["CA"]).
 					To(HaveKeyWithValue("Third", "XXX"))
 			})
 
 			It("Ofuscating Fourth", func() {
-				Expect(Ofuscate(input, "CA.Fourth")["CA"]).
+				Expect(Ofuscate(input, "CA.Fourth").(map[string]interface{})["CA"]).
 					To(HaveKeyWithValue("Fourth", "XXX"))
 			})
 
 			It("Ofuscating CB", func() {
-				Expect(Ofuscate(input, "CA.CB")["CA"]).
+				Expect(Ofuscate(input, "CA.CB").(map[string]interface{})["CA"]).
 					To(HaveKeyWithValue("CB", "XXX"))
 			})
 		})
 
 		When("Ofuscating C.CA.CB on third level of nesting", func() {
 			It("Ofuscating First", func() {
-				Expect(Ofuscate(input, "CA.CB.First")["CA"].(map[string]interface{})["CB"]).
+				Expect(Ofuscate(input, "CA.CB.First").(map[string]interface{})["CA"].(map[string]interface{})["CB"]).
 					To(HaveKeyWithValue("First", "XXX"))
 			})
 
 			It("Ofuscating Second", func() {
-				Expect(Ofuscate(input, "CA.CB.Second")["CA"].(map[string]interface{})["CB"]).
+				Expect(Ofuscate(input, "CA.CB.Second").(map[string]interface{})["CA"].(map[string]interface{})["CB"]).
 					To(HaveKeyWithValue("Second", "XXX"))
 			})
 
 			It("Ofuscating Third", func() {
-				Expect(Ofuscate(input, "CA.CB.Third")["CA"].(map[string]interface{})["CB"]).
+				Expect(Ofuscate(input, "CA.CB.Third").(map[string]interface{})["CA"].(map[string]interface{})["CB"]).
 					To(HaveKeyWithValue("Third", "XXX"))
 			})
 
 			It("Ofuscating Fourth", func() {
-				Expect(Ofuscate(input, "CA.CB.Fourth")["CA"].(map[string]interface{})["CB"]).
+				Expect(Ofuscate(input, "CA.CB.Fourth").(map[string]interface{})["CA"].(map[string]interface{})["CB"]).
 					To(HaveKeyWithValue("Fourth", "XXX"))
 			})
 
 			It("Ofuscating CC", func() {
-				Expect(Ofuscate(input, "CA.CB.CC")["CA"].(map[string]interface{})["CB"]).
+				Expect(Ofuscate(input, "CA.CB.CC").(map[string]interface{})["CA"].(map[string]interface{})["CB"]).
 					To(HaveKeyWithValue("CC", "XXX"))
 			})
 		})
 
 		When("Ofuscating C.CA.CB.CC on fourth level of nesting", func() {
 			It("Ofuscating First", func() {
-				Expect(Ofuscate(input, "CA.CB.CC.First")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"]).
+				Expect(
+					Ofuscate(input, "CA.CB.CC.First").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"],
+				).
 					To(HaveKeyWithValue("First", "XXX"))
 			})
 
 			It("Ofuscating Second", func() {
-				Expect(Ofuscate(input, "CA.CB.CC.Second")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"]).
+				Expect(
+					Ofuscate(input, "CA.CB.CC.Second").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"],
+				).
 					To(HaveKeyWithValue("Second", "XXX"))
 			})
 
 			It("Ofuscating Third", func() {
-				Expect(Ofuscate(input, "CA.CB.CC.Third")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"]).
+				Expect(
+					Ofuscate(input, "CA.CB.CC.Third").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"],
+				).
 					To(HaveKeyWithValue("Third", "XXX"))
 			})
 
 			It("Ofuscating Fourth", func() {
-				Expect(Ofuscate(input, "CA.CB.CC.Fourth")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"]).
+				Expect(
+					Ofuscate(input, "CA.CB.CC.Fourth").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"],
+				).
 					To(HaveKeyWithValue("Fourth", "XXX"))
 			})
 
 			It("Ofuscating CD", func() {
-				Expect(Ofuscate(input, "CA.CB.CC.CD")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"]).
+				Expect(
+					Ofuscate(input, "CA.CB.CC.CD").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"],
+				).
 					To(HaveKeyWithValue("CD", "XXX"))
 			})
 		})
@@ -856,35 +866,35 @@ var _ = Describe("OfuscateStruct", func() {
 		When("Ofuscating C.CA.CB.CC.CD on fifth level of nesting", func() {
 			It("Ofuscating First", func() {
 				Expect(
-					Ofuscate(input, "CA.CB.CC.CD.First")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
+					Ofuscate(input, "CA.CB.CC.CD.First").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
 				).
 					To(HaveKeyWithValue("First", "XXX"))
 			})
 
 			It("Ofuscating Second", func() {
 				Expect(
-					Ofuscate(input, "CA.CB.CC.CD.Second")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
+					Ofuscate(input, "CA.CB.CC.CD.Second").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
 				).
 					To(HaveKeyWithValue("Second", "XXX"))
 			})
 
 			It("Ofuscating Third", func() {
 				Expect(
-					Ofuscate(input, "CA.CB.CC.CD.Third")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
+					Ofuscate(input, "CA.CB.CC.CD.Third").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
 				).
 					To(HaveKeyWithValue("Third", "XXX"))
 			})
 
 			It("Ofuscating Fourth", func() {
 				Expect(
-					Ofuscate(input, "CA.CB.CC.CD.Fourth")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
+					Ofuscate(input, "CA.CB.CC.CD.Fourth").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
 				).
 					To(HaveKeyWithValue("Fourth", "XXX"))
 			})
 
 			It("Ofuscating CE", func() {
 				Expect(
-					Ofuscate(input, "CA.CB.CC.CD.CE")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
+					Ofuscate(input, "CA.CB.CC.CD.CE").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"],
 				).
 					To(HaveKeyWithValue("CE", "XXX"))
 			})
@@ -893,28 +903,28 @@ var _ = Describe("OfuscateStruct", func() {
 		When("Ofuscating C.CA.CB.CC.CD.CE on sixth level of nesting", func() {
 			It("Ofuscating First", func() {
 				Expect(
-					Ofuscate(input, "CA.CB.CC.CD.CE.First")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"].(map[string]interface{})["CE"],
+					Ofuscate(input, "CA.CB.CC.CD.CE.First").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"].(map[string]interface{})["CE"],
 				).
 					To(HaveKeyWithValue("First", "XXX"))
 			})
 
 			It("Ofuscating Second", func() {
 				Expect(
-					Ofuscate(input, "CA.CB.CC.CD.CE.Second")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"].(map[string]interface{})["CE"],
+					Ofuscate(input, "CA.CB.CC.CD.CE.Second").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"].(map[string]interface{})["CE"],
 				).
 					To(HaveKeyWithValue("Second", "XXX"))
 			})
 
 			It("Ofuscating Third", func() {
 				Expect(
-					Ofuscate(input, "CA.CB.CC.CD.CE.Third")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"].(map[string]interface{})["CE"],
+					Ofuscate(input, "CA.CB.CC.CD.CE.Third").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"].(map[string]interface{})["CE"],
 				).
 					To(HaveKeyWithValue("Third", "XXX"))
 			})
 
 			It("Ofuscating Fourth", func() {
 				Expect(
-					Ofuscate(input, "CA.CB.CC.CD.CE.Fourth")["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"].(map[string]interface{})["CE"],
+					Ofuscate(input, "CA.CB.CC.CD.CE.Fourth").(map[string]interface{})["CA"].(map[string]interface{})["CB"].(map[string]interface{})["CC"].(map[string]interface{})["CD"].(map[string]interface{})["CE"],
 				).
 					To(HaveKeyWithValue("Fourth", "XXX"))
 			})
@@ -1032,106 +1042,128 @@ var _ = Describe("OfuscateStruct", func() {
 		When("Ofuscating DA[*].DB", func() {
 			When("Ofuscating first element", func() {
 				It("Ofuscating the entire array", func() {
-					Expect(Ofuscate(input, "DAs[0].DBs")["DAs"].([]any)[0].(map[string]interface{})).
+					Expect(Ofuscate(input, "DAs[0].DBs").(map[string]interface{})["DAs"].([]any)[0].(map[string]interface{})).
 						To(HaveKeyWithValue("DBs", "XXX"))
 				})
 
 				It("Ofuscating the entire array with brackets", func() {
-					Expect(Ofuscate(input, "DAs[0].DBs[]")["DAs"].([]any)[0].(map[string]interface{})).
+					Expect(Ofuscate(input, "DAs[0].DBs[]").(map[string]interface{})["DAs"].([]any)[0].(map[string]interface{})).
 						To(HaveKeyWithValue("DBs", "XXX"))
 				})
 
 				It("Ofuscating the first element of the arr", func() {
-					Expect(Ofuscate(input, "DAs[0].DBs[0]")["DAs"].([]any)[0].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[0].DBs[0]").(map[string]interface{})["DAs"].([]any)[0].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("DBs", []any{"XXX", input.DAs[0].DBs[0]}))
 				})
 
 				It("Ofuscating the second element of the arr", func() {
-					Expect(Ofuscate(input, "DAs[0].DBs[1]")["DAs"].([]any)[0].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[0].DBs[1]").(map[string]interface{})["DAs"].([]any)[0].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("DBs", []any{input.DAs[0].DBs[1], "XXX"}))
 				})
 
 				It("Ofuscating another array of basic types", func() {
-					Expect(Ofuscate(input, "DAs[0].Fifth[]")["DAs"].([]any)[0].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[0].Fifth[]").(map[string]interface{})["DAs"].([]any)[0].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("Fifth", "XXX"))
 				})
 
 				It("Ofuscating an index of an array of basic types", func() {
-					Expect(Ofuscate(input, "DAs[0].Fifth[0]")["DAs"].([]any)[0].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[0].Fifth[0]").(map[string]interface{})["DAs"].([]any)[0].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("Fifth", []string{"XXX", input.DAs[0].Fifth[1]}))
 				})
 
 				It("Ofuscating with index out of range is not a problem", func() {
-					Expect(Ofuscate(input, "DAs[0].DBs[9]")["DAs"].([]any)[0].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[0].DBs[9]").(map[string]interface{})["DAs"].([]any)[0].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("DBs", input.DAs[0].DBs))
 				})
 
 				It("Ofuscating with index under 0 is not a problem either", func() {
-					Expect(Ofuscate(input, "DAs[0].DBs[-1]")["DAs"].([]any)[0].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[0].DBs[-1]").(map[string]interface{})["DAs"].([]any)[0].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("DBs", input.DAs[0].DBs))
 				})
 			})
 
 			When("Ofuscating second element", func() {
 				It("Ofuscating the entire array", func() {
-					Expect(Ofuscate(input, "DAs[1].DBs")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(Ofuscate(input, "DAs[1].DBs").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{})).
 						To(HaveKeyWithValue("DBs", "XXX"))
 				})
 
 				It("Ofuscating the entire array with brackets", func() {
-					Expect(Ofuscate(input, "DAs[1].DBs[]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(Ofuscate(input, "DAs[1].DBs[]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{})).
 						To(HaveKeyWithValue("DBs", "XXX"))
 				})
 
 				It("Ofuscating the first element of the arr", func() {
-					Expect(Ofuscate(input, "DAs[1].DBs[0]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[1].DBs[0]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("DBs", []any{"XXX", input.DAs[1].DBs[0]}))
 				})
 
 				It("Ofuscating the second element of the arr", func() {
-					Expect(Ofuscate(input, "DAs[1].DBs[1]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[1].DBs[1]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("DBs", []any{input.DAs[1].DBs[1], "XXX"}))
 				})
 
 				It("Ofuscating with index out of range is not a problem", func() {
-					Expect(Ofuscate(input, "DAs[1].DBs[9]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[1].DBs[9]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("DBs", input.DAs[1].DBs))
 				})
 
 				It("Ofuscating with index under 0 is not a problem either", func() {
-					Expect(Ofuscate(input, "DAs[1].DBs[-1]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[1].DBs[-1]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("DBs", input.DAs[1].DBs))
 				})
 			})
 
 			When("Ofuscating every element", func() {
 				It("Ofuscating the entire array", func() {
-					Expect(Ofuscate(input, "DAs[].DBs")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(Ofuscate(input, "DAs[].DBs").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{})).
 						To(HaveKeyWithValue("DBs", "XXX"))
 				})
 
 				It("Ofuscating the entire array with brackets", func() {
-					Expect(Ofuscate(input, "DAs[].DBs[]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(Ofuscate(input, "DAs[].DBs[]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{})).
 						To(HaveKeyWithValue("DBs", "XXX"))
 				})
 
 				It("Ofuscating the first element of the arr", func() {
-					Expect(Ofuscate(input, "DAs[].DBs[0]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(Ofuscate(input, "DAs[].DBs[0]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{})).
 						To(HaveKeyWithValue("DBs", []any{"XXX", input.DAs[1].DBs[0]}))
 				})
 
 				It("Ofuscating the second element of the arr", func() {
-					Expect(Ofuscate(input, "DAs[].DBs[1]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(Ofuscate(input, "DAs[].DBs[1]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{})).
 						To(HaveKeyWithValue("DBs", []any{input.DAs[1].DBs[1], "XXX"}))
 				})
 
 				It("Ofuscating with index out of range is not a problem", func() {
-					Expect(Ofuscate(input, "DAs[].DBs[9]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(Ofuscate(input, "DAs[].DBs[9]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{})).
 						To(HaveKeyWithValue("DBs", input.DAs[1].DBs))
 				})
 
 				It("Ofuscating with index under 0 is not a problem either", func() {
-					Expect(Ofuscate(input, "DAs[].DBs[-1]")["DAs"].([]any)[1].(map[string]interface{})).
+					Expect(
+						Ofuscate(input, "DAs[].DBs[-1]").(map[string]interface{})["DAs"].([]any)[1].(map[string]interface{}),
+					).
 						To(HaveKeyWithValue("DBs", input.DAs[1].DBs))
 				})
 			})
@@ -1190,406 +1222,406 @@ var _ = Describe("OfuscateStruct", func() {
 
 		When("ofuscating i8s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(i8s, "[0]")).To(Equal([]any{"XXX", i8(2), i8(3), i8(4)}))
+				Expect(Ofuscate(i8s, "[0]")).To(Equal([]any{"XXX", i8(2), i8(3), i8(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(i8s, "[1]")).To(Equal([]any{i8(1), "XXX", i8(3), i8(4)}))
+				Expect(Ofuscate(i8s, "[1]")).To(Equal([]any{i8(1), "XXX", i8(3), i8(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(i8s, "[2]")).To(Equal([]any{i8(1), i8(2), "XXX", i8(4)}))
+				Expect(Ofuscate(i8s, "[2]")).To(Equal([]any{i8(1), i8(2), "XXX", i8(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(i8s, "[3]")).To(Equal([]any{i8(1), i8(2), i8(3), "XXX"}))
+				Expect(Ofuscate(i8s, "[3]")).To(Equal([]any{i8(1), i8(2), i8(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(i8s, "[4]")).To(Equal([]any{i8(1), i8(2), i8(3), i8(4)}))
+				Expect(Ofuscate(i8s, "[4]")).To(Equal([]any{i8(1), i8(2), i8(3), i8(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(i8s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(i8s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating u8s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(u8s, "[0]")).To(Equal([]any{"XXX", u8(2), u8(3), u8(4)}))
+				Expect(Ofuscate(u8s, "[0]")).To(Equal([]any{"XXX", u8(2), u8(3), u8(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(u8s, "[1]")).To(Equal([]any{u8(1), "XXX", u8(3), u8(4)}))
+				Expect(Ofuscate(u8s, "[1]")).To(Equal([]any{u8(1), "XXX", u8(3), u8(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(u8s, "[2]")).To(Equal([]any{u8(1), u8(2), "XXX", u8(4)}))
+				Expect(Ofuscate(u8s, "[2]")).To(Equal([]any{u8(1), u8(2), "XXX", u8(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(u8s, "[3]")).To(Equal([]any{u8(1), u8(2), u8(3), "XXX"}))
+				Expect(Ofuscate(u8s, "[3]")).To(Equal([]any{u8(1), u8(2), u8(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(u8s, "[4]")).To(Equal([]any{u8(1), u8(2), u8(3), u8(4)}))
+				Expect(Ofuscate(u8s, "[4]")).To(Equal([]any{u8(1), u8(2), u8(3), u8(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(u8s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(u8s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating bytes", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(bytes, "[0]")).To(Equal([]any{"XXX", byte(0x65), byte(0x6c), byte(0x6c), byte(0x6f)}))
+				Expect(Ofuscate(bytes, "[0]")).To(Equal([]any{"XXX", byte(0x65), byte(0x6c), byte(0x6c), byte(0x6f)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(bytes, "[1]")).To(Equal([]any{byte(0x68), "XXX", byte(0x6c), byte(0x6c), byte(0x6f)}))
+				Expect(Ofuscate(bytes, "[1]")).To(Equal([]any{byte(0x68), "XXX", byte(0x6c), byte(0x6c), byte(0x6f)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(bytes, "[2]")).To(Equal([]any{byte(0x68), byte(0x65), "XXX", byte(0x6c), byte(0x6f)}))
+				Expect(Ofuscate(bytes, "[2]")).To(Equal([]any{byte(0x68), byte(0x65), "XXX", byte(0x6c), byte(0x6f)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(bytes, "[3]")).To(Equal([]any{byte(0x68), byte(0x65), byte(0x6c), "XXX", byte(0x6f)}))
+				Expect(Ofuscate(bytes, "[3]")).To(Equal([]any{byte(0x68), byte(0x65), byte(0x6c), "XXX", byte(0x6f)}))
 			})
 
 			It("Ofuscating Fifth element", func() {
-				Expect(OfuscateArr(bytes, "[4]")).To(Equal([]any{byte(0x68), byte(0x65), byte(0x6c), byte(0x6c), "XXX"}))
+				Expect(Ofuscate(bytes, "[4]")).To(Equal([]any{byte(0x68), byte(0x65), byte(0x6c), byte(0x6c), "XXX"}))
 			})
 
 			It("Ofuscating Sixth element, unexitent", func() {
-				Expect(OfuscateArr(bytes, "[5]")).To(Equal([]any{byte(0x68), byte(0x65), byte(0x6c), byte(0x6c), byte(0x6f)}))
+				Expect(Ofuscate(bytes, "[5]")).To(Equal([]any{byte(0x68), byte(0x65), byte(0x6c), byte(0x6c), byte(0x6f)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(bytes, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(bytes, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating i16s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(i16s, "[0]")).To(Equal([]any{"XXX", i16(2), i16(3), i16(4)}))
+				Expect(Ofuscate(i16s, "[0]")).To(Equal([]any{"XXX", i16(2), i16(3), i16(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(i16s, "[1]")).To(Equal([]any{i16(1), "XXX", i16(3), i16(4)}))
+				Expect(Ofuscate(i16s, "[1]")).To(Equal([]any{i16(1), "XXX", i16(3), i16(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(i16s, "[2]")).To(Equal([]any{i16(1), i16(2), "XXX", i16(4)}))
+				Expect(Ofuscate(i16s, "[2]")).To(Equal([]any{i16(1), i16(2), "XXX", i16(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(i16s, "[3]")).To(Equal([]any{i16(1), i16(2), i16(3), "XXX"}))
+				Expect(Ofuscate(i16s, "[3]")).To(Equal([]any{i16(1), i16(2), i16(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(i16s, "[4]")).To(Equal([]any{i16(1), i16(2), i16(3), i16(4)}))
+				Expect(Ofuscate(i16s, "[4]")).To(Equal([]any{i16(1), i16(2), i16(3), i16(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(i16s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(i16s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating u16s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(u16s, "[0]")).To(Equal([]any{"XXX", u16(2), u16(3), u16(4)}))
+				Expect(Ofuscate(u16s, "[0]")).To(Equal([]any{"XXX", u16(2), u16(3), u16(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(u16s, "[1]")).To(Equal([]any{u16(1), "XXX", u16(3), u16(4)}))
+				Expect(Ofuscate(u16s, "[1]")).To(Equal([]any{u16(1), "XXX", u16(3), u16(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(u16s, "[2]")).To(Equal([]any{u16(1), u16(2), "XXX", u16(4)}))
+				Expect(Ofuscate(u16s, "[2]")).To(Equal([]any{u16(1), u16(2), "XXX", u16(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(u16s, "[3]")).To(Equal([]any{u16(1), u16(2), u16(3), "XXX"}))
+				Expect(Ofuscate(u16s, "[3]")).To(Equal([]any{u16(1), u16(2), u16(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(u16s, "[4]")).To(Equal([]any{u16(1), u16(2), u16(3), u16(4)}))
+				Expect(Ofuscate(u16s, "[4]")).To(Equal([]any{u16(1), u16(2), u16(3), u16(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(u16s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(u16s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating i32s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(i32s, "[0]")).To(Equal([]any{"XXX", i32(2), i32(3), i32(4)}))
+				Expect(Ofuscate(i32s, "[0]")).To(Equal([]any{"XXX", i32(2), i32(3), i32(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(i32s, "[1]")).To(Equal([]any{i32(1), "XXX", i32(3), i32(4)}))
+				Expect(Ofuscate(i32s, "[1]")).To(Equal([]any{i32(1), "XXX", i32(3), i32(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(i32s, "[2]")).To(Equal([]any{i32(1), i32(2), "XXX", i32(4)}))
+				Expect(Ofuscate(i32s, "[2]")).To(Equal([]any{i32(1), i32(2), "XXX", i32(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(i32s, "[3]")).To(Equal([]any{i32(1), i32(2), i32(3), "XXX"}))
+				Expect(Ofuscate(i32s, "[3]")).To(Equal([]any{i32(1), i32(2), i32(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(i32s, "[4]")).To(Equal([]any{i32(1), i32(2), i32(3), i32(4)}))
+				Expect(Ofuscate(i32s, "[4]")).To(Equal([]any{i32(1), i32(2), i32(3), i32(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(i32s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(i32s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating u32s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(u32s, "[0]")).To(Equal([]any{"XXX", u32(2), u32(3), u32(4)}))
+				Expect(Ofuscate(u32s, "[0]")).To(Equal([]any{"XXX", u32(2), u32(3), u32(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(u32s, "[1]")).To(Equal([]any{u32(1), "XXX", u32(3), u32(4)}))
+				Expect(Ofuscate(u32s, "[1]")).To(Equal([]any{u32(1), "XXX", u32(3), u32(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(u32s, "[2]")).To(Equal([]any{u32(1), u32(2), "XXX", u32(4)}))
+				Expect(Ofuscate(u32s, "[2]")).To(Equal([]any{u32(1), u32(2), "XXX", u32(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(u32s, "[3]")).To(Equal([]any{u32(1), u32(2), u32(3), "XXX"}))
+				Expect(Ofuscate(u32s, "[3]")).To(Equal([]any{u32(1), u32(2), u32(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(u32s, "[4]")).To(Equal([]any{u32(1), u32(2), u32(3), u32(4)}))
+				Expect(Ofuscate(u32s, "[4]")).To(Equal([]any{u32(1), u32(2), u32(3), u32(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(u32s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(u32s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating i64s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(i64s, "[0]")).To(Equal([]any{"XXX", i64(2), i64(3), i64(4)}))
+				Expect(Ofuscate(i64s, "[0]")).To(Equal([]any{"XXX", i64(2), i64(3), i64(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(i64s, "[1]")).To(Equal([]any{i64(1), "XXX", i64(3), i64(4)}))
+				Expect(Ofuscate(i64s, "[1]")).To(Equal([]any{i64(1), "XXX", i64(3), i64(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(i64s, "[2]")).To(Equal([]any{i64(1), i64(2), "XXX", i64(4)}))
+				Expect(Ofuscate(i64s, "[2]")).To(Equal([]any{i64(1), i64(2), "XXX", i64(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(i64s, "[3]")).To(Equal([]any{i64(1), i64(2), i64(3), "XXX"}))
+				Expect(Ofuscate(i64s, "[3]")).To(Equal([]any{i64(1), i64(2), i64(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(i64s, "[4]")).To(Equal([]any{i64(1), i64(2), i64(3), i64(4)}))
+				Expect(Ofuscate(i64s, "[4]")).To(Equal([]any{i64(1), i64(2), i64(3), i64(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(i64s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(i64s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating u64s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(u64s, "[0]")).To(Equal([]any{"XXX", u64(2), u64(3), u64(4)}))
+				Expect(Ofuscate(u64s, "[0]")).To(Equal([]any{"XXX", u64(2), u64(3), u64(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(u64s, "[1]")).To(Equal([]any{u64(1), "XXX", u64(3), u64(4)}))
+				Expect(Ofuscate(u64s, "[1]")).To(Equal([]any{u64(1), "XXX", u64(3), u64(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(u64s, "[2]")).To(Equal([]any{u64(1), u64(2), "XXX", u64(4)}))
+				Expect(Ofuscate(u64s, "[2]")).To(Equal([]any{u64(1), u64(2), "XXX", u64(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(u64s, "[3]")).To(Equal([]any{u64(1), u64(2), u64(3), "XXX"}))
+				Expect(Ofuscate(u64s, "[3]")).To(Equal([]any{u64(1), u64(2), u64(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(u64s, "[4]")).To(Equal([]any{u64(1), u64(2), u64(3), u64(4)}))
+				Expect(Ofuscate(u64s, "[4]")).To(Equal([]any{u64(1), u64(2), u64(3), u64(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(u64s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(u64s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating ints", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(ints, "[0]")).To(Equal([]any{"XXX", int(2), int(3), int(4)}))
+				Expect(Ofuscate(ints, "[0]")).To(Equal([]any{"XXX", int(2), int(3), int(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(ints, "[1]")).To(Equal([]any{int(1), "XXX", int(3), int(4)}))
+				Expect(Ofuscate(ints, "[1]")).To(Equal([]any{int(1), "XXX", int(3), int(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(ints, "[2]")).To(Equal([]any{int(1), int(2), "XXX", int(4)}))
+				Expect(Ofuscate(ints, "[2]")).To(Equal([]any{int(1), int(2), "XXX", int(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(ints, "[3]")).To(Equal([]any{int(1), int(2), int(3), "XXX"}))
+				Expect(Ofuscate(ints, "[3]")).To(Equal([]any{int(1), int(2), int(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(ints, "[4]")).To(Equal([]any{int(1), int(2), int(3), int(4)}))
+				Expect(Ofuscate(ints, "[4]")).To(Equal([]any{int(1), int(2), int(3), int(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(ints, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(ints, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating uints", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(uints, "[0]")).To(Equal([]any{"XXX", uint(2), uint(3), uint(4)}))
+				Expect(Ofuscate(uints, "[0]")).To(Equal([]any{"XXX", uint(2), uint(3), uint(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(uints, "[1]")).To(Equal([]any{uint(1), "XXX", uint(3), uint(4)}))
+				Expect(Ofuscate(uints, "[1]")).To(Equal([]any{uint(1), "XXX", uint(3), uint(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(uints, "[2]")).To(Equal([]any{uint(1), uint(2), "XXX", uint(4)}))
+				Expect(Ofuscate(uints, "[2]")).To(Equal([]any{uint(1), uint(2), "XXX", uint(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(uints, "[3]")).To(Equal([]any{uint(1), uint(2), uint(3), "XXX"}))
+				Expect(Ofuscate(uints, "[3]")).To(Equal([]any{uint(1), uint(2), uint(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(uints, "[4]")).To(Equal([]any{uint(1), uint(2), uint(3), uint(4)}))
+				Expect(Ofuscate(uints, "[4]")).To(Equal([]any{uint(1), uint(2), uint(3), uint(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(uints, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(uints, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating f32s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(f32s, "[0]")).To(Equal([]any{"XXX", f32(2), f32(3), f32(4)}))
+				Expect(Ofuscate(f32s, "[0]")).To(Equal([]any{"XXX", f32(2), f32(3), f32(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(f32s, "[1]")).To(Equal([]any{f32(1), "XXX", f32(3), f32(4)}))
+				Expect(Ofuscate(f32s, "[1]")).To(Equal([]any{f32(1), "XXX", f32(3), f32(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(f32s, "[2]")).To(Equal([]any{f32(1), f32(2), "XXX", f32(4)}))
+				Expect(Ofuscate(f32s, "[2]")).To(Equal([]any{f32(1), f32(2), "XXX", f32(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(f32s, "[3]")).To(Equal([]any{f32(1), f32(2), f32(3), "XXX"}))
+				Expect(Ofuscate(f32s, "[3]")).To(Equal([]any{f32(1), f32(2), f32(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(f32s, "[4]")).To(Equal([]any{f32(1), f32(2), f32(3), f32(4)}))
+				Expect(Ofuscate(f32s, "[4]")).To(Equal([]any{f32(1), f32(2), f32(3), f32(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(f32s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(f32s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating f64s", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(f64s, "[0]")).To(Equal([]any{"XXX", f64(2), f64(3), f64(4)}))
+				Expect(Ofuscate(f64s, "[0]")).To(Equal([]any{"XXX", f64(2), f64(3), f64(4)}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(f64s, "[1]")).To(Equal([]any{f64(1), "XXX", f64(3), f64(4)}))
+				Expect(Ofuscate(f64s, "[1]")).To(Equal([]any{f64(1), "XXX", f64(3), f64(4)}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(f64s, "[2]")).To(Equal([]any{f64(1), f64(2), "XXX", f64(4)}))
+				Expect(Ofuscate(f64s, "[2]")).To(Equal([]any{f64(1), f64(2), "XXX", f64(4)}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(f64s, "[3]")).To(Equal([]any{f64(1), f64(2), f64(3), "XXX"}))
+				Expect(Ofuscate(f64s, "[3]")).To(Equal([]any{f64(1), f64(2), f64(3), "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(f64s, "[4]")).To(Equal([]any{f64(1), f64(2), f64(3), f64(4)}))
+				Expect(Ofuscate(f64s, "[4]")).To(Equal([]any{f64(1), f64(2), f64(3), f64(4)}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(f64s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(f64s, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating strings", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(strings, "[0]")).To(Equal([]any{"XXX", "world", "bye", "goodbye"}))
+				Expect(Ofuscate(strings, "[0]")).To(Equal([]any{"XXX", "world", "bye", "goodbye"}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(strings, "[1]")).To(Equal([]any{"hello", "XXX", "bye", "goodbye"}))
+				Expect(Ofuscate(strings, "[1]")).To(Equal([]any{"hello", "XXX", "bye", "goodbye"}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(strings, "[2]")).To(Equal([]any{"hello", "world", "XXX", "goodbye"}))
+				Expect(Ofuscate(strings, "[2]")).To(Equal([]any{"hello", "world", "XXX", "goodbye"}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(strings, "[3]")).To(Equal([]any{"hello", "world", "bye", "XXX"}))
+				Expect(Ofuscate(strings, "[3]")).To(Equal([]any{"hello", "world", "bye", "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(strings, "[4]")).To(Equal([]any{"hello", "world", "bye", "goodbye"}))
+				Expect(Ofuscate(strings, "[4]")).To(Equal([]any{"hello", "world", "bye", "goodbye"}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(strings, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(strings, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating bools", func() {
 			It("Ofuscating first element", func() {
-				Expect(OfuscateArr(bools, "[0]")).To(Equal([]any{"XXX", false, true, false}))
+				Expect(Ofuscate(bools, "[0]")).To(Equal([]any{"XXX", false, true, false}))
 			})
 
 			It("Ofuscating second element", func() {
-				Expect(OfuscateArr(bools, "[1]")).To(Equal([]any{true, "XXX", true, false}))
+				Expect(Ofuscate(bools, "[1]")).To(Equal([]any{true, "XXX", true, false}))
 			})
 
 			It("Ofuscating third element", func() {
-				Expect(OfuscateArr(bools, "[2]")).To(Equal([]any{true, false, "XXX", false}))
+				Expect(Ofuscate(bools, "[2]")).To(Equal([]any{true, false, "XXX", false}))
 			})
 
 			It("Ofuscating fourth element", func() {
-				Expect(OfuscateArr(bools, "[3]")).To(Equal([]any{true, false, true, "XXX"}))
+				Expect(Ofuscate(bools, "[3]")).To(Equal([]any{true, false, true, "XXX"}))
 			})
 
 			It("Ofuscating Fifth element, unexistent", func() {
-				Expect(OfuscateArr(bools, "[4]")).To(Equal([]any{true, false, true, false}))
+				Expect(Ofuscate(bools, "[4]")).To(Equal([]any{true, false, true, false}))
 			})
 
 			It("Ofuscating everything", func() {
-				Expect(OfuscateArr(bools, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
+				Expect(Ofuscate(bools, "[]")).To(Equal([]any{"XXX", "XXX", "XXX", "XXX"}))
 			})
 		})
 
 		When("ofuscating structs", func() {
 			When("ofuscating first element", func() {
 				It("entirely", func() {
-					Expect(OfuscateArr(structs, "[0]")).To(Equal([]any{"XXX", structs[1]}))
+					Expect(Ofuscate(structs, "[0]")).To(Equal([]any{"XXX", structs[1]}))
 				})
 
 				It("First attribute", func() {
-					Expect(OfuscateArr(structs, "[0].First")).To(Equal([]any{map[string]any{
+					Expect(Ofuscate(structs, "[0].First")).To(Equal([]any{map[string]any{
 						"First":  "XXX",
 						"Second": structs[0].Second,
 						"Third":  structs[0].Third,
@@ -1597,7 +1629,7 @@ var _ = Describe("OfuscateStruct", func() {
 				})
 
 				It("Second attribute", func() {
-					Expect(OfuscateArr(structs, "[0].Second")).To(Equal([]any{map[string]any{
+					Expect(Ofuscate(structs, "[0].Second")).To(Equal([]any{map[string]any{
 						"First":  structs[0].First,
 						"Second": "XXX",
 						"Third":  structs[0].Third,
@@ -1605,7 +1637,7 @@ var _ = Describe("OfuscateStruct", func() {
 				})
 
 				It("Third attribute", func() {
-					Expect(OfuscateArr(structs, "[0].Third")).To(Equal([]any{map[string]any{
+					Expect(Ofuscate(structs, "[0].Third")).To(Equal([]any{map[string]any{
 						"First":  structs[0].First,
 						"Second": structs[0].Second,
 						"Third":  "XXX",
@@ -1615,11 +1647,11 @@ var _ = Describe("OfuscateStruct", func() {
 
 			When("ofuscating seocnd element", func() {
 				It("entirely", func() {
-					Expect(OfuscateArr(structs, "[1]")).To(Equal([]any{structs[0], "XXX"}))
+					Expect(Ofuscate(structs, "[1]")).To(Equal([]any{structs[0], "XXX"}))
 				})
 
 				It("First attribute", func() {
-					Expect(OfuscateArr(structs, "[1].First")).To(Equal([]any{structs[0], map[string]any{
+					Expect(Ofuscate(structs, "[1].First")).To(Equal([]any{structs[0], map[string]any{
 						"First":  "XXX",
 						"Second": structs[1].Second,
 						"Third":  structs[1].Third,
@@ -1627,7 +1659,7 @@ var _ = Describe("OfuscateStruct", func() {
 				})
 
 				It("Second attribute", func() {
-					Expect(OfuscateArr(structs, "[1].Second")).To(Equal([]any{structs[0], map[string]any{
+					Expect(Ofuscate(structs, "[1].Second")).To(Equal([]any{structs[0], map[string]any{
 						"First":  structs[1].First,
 						"Second": "XXX",
 						"Third":  structs[1].Third,
@@ -1635,7 +1667,7 @@ var _ = Describe("OfuscateStruct", func() {
 				})
 
 				It("Third attribute", func() {
-					Expect(OfuscateArr(structs, "[1].Third")).To(Equal([]any{structs[0], map[string]any{
+					Expect(Ofuscate(structs, "[1].Third")).To(Equal([]any{structs[0], map[string]any{
 						"First":  structs[1].First,
 						"Second": structs[1].Second,
 						"Third":  "XXX",
@@ -1696,7 +1728,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", i8(2), i8(3), i8(4)},
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -1704,7 +1736,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i8(1), "XXX", i8(3), i8(4)},
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -1712,7 +1744,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i8(1), i8(2), "XXX", i8(4)},
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -1720,7 +1752,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i8(1), i8(2), i8(3), "XXX"},
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -1728,7 +1760,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i8(1), i8(2), i8(3), i8(4)},
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -1736,7 +1768,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -1746,7 +1778,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 						[]any{"XXX", i8(2), i8(3), i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -1754,7 +1786,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 						[]any{i8(1), "XXX", i8(3), i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -1762,7 +1794,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 						[]any{i8(1), i8(2), "XXX", i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -1770,7 +1802,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 						[]any{i8(1), i8(2), i8(3), "XXX"},
 					}
-					Expect(OfuscateArr(i8s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -1778,7 +1810,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 						[]any{i8(1), i8(2), i8(3), i8(4)},
 					}
-					Expect(OfuscateArr(i8s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -1786,7 +1818,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i8{i8(1), i8(2), i8(3), i8(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(i8s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(i8s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -1798,7 +1830,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", u8(2), u8(3), u8(4)},
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -1806,7 +1838,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u8(1), "XXX", u8(3), u8(4)},
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -1814,7 +1846,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u8(1), u8(2), "XXX", u8(4)},
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -1822,7 +1854,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u8(1), u8(2), u8(3), "XXX"},
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -1830,7 +1862,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u8(1), u8(2), u8(3), u8(4)},
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -1838,7 +1870,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -1848,7 +1880,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 						[]any{"XXX", u8(2), u8(3), u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -1856,7 +1888,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 						[]any{u8(1), "XXX", u8(3), u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -1864,7 +1896,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 						[]any{u8(1), u8(2), "XXX", u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -1872,7 +1904,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 						[]any{u8(1), u8(2), u8(3), "XXX"},
 					}
-					Expect(OfuscateArr(u8s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -1880,7 +1912,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 						[]any{u8(1), u8(2), u8(3), u8(4)},
 					}
-					Expect(OfuscateArr(u8s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -1888,7 +1920,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u8{u8(1), u8(2), u8(3), u8(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(u8s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(u8s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -1900,7 +1932,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", i16(2), i16(3), i16(4)},
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -1908,7 +1940,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i16(1), "XXX", i16(3), i16(4)},
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -1916,7 +1948,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i16(1), i16(2), "XXX", i16(4)},
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -1924,7 +1956,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i16(1), i16(2), i16(3), "XXX"},
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -1932,7 +1964,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i16(1), i16(2), i16(3), i16(4)},
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -1940,7 +1972,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -1950,7 +1982,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 						[]any{"XXX", i16(2), i16(3), i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -1958,7 +1990,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 						[]any{i16(1), "XXX", i16(3), i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -1966,7 +1998,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 						[]any{i16(1), i16(2), "XXX", i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -1974,7 +2006,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 						[]any{i16(1), i16(2), i16(3), "XXX"},
 					}
-					Expect(OfuscateArr(i16s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -1982,7 +2014,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 						[]any{i16(1), i16(2), i16(3), i16(4)},
 					}
-					Expect(OfuscateArr(i16s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -1990,7 +2022,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i16{i16(1), i16(2), i16(3), i16(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(i16s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(i16s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2002,7 +2034,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", u16(2), u16(3), u16(4)},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2010,7 +2042,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u16(1), "XXX", u16(3), u16(4)},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2018,7 +2050,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u16(1), u16(2), "XXX", u16(4)},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2026,7 +2058,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u16(1), u16(2), u16(3), "XXX"},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2034,7 +2066,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u16(1), u16(2), u16(3), u16(4)},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2042,7 +2074,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2052,7 +2084,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{"XXX", u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2060,7 +2092,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{u16(1), "XXX", u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2068,7 +2100,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{u16(1), u16(2), "XXX", u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2076,7 +2108,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{u16(1), u16(2), u16(3), "XXX"},
 					}
-					Expect(OfuscateArr(u16s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2084,7 +2116,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2092,7 +2124,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(u16s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2104,7 +2136,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", u16(2), u16(3), u16(4)},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2112,7 +2144,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u16(1), "XXX", u16(3), u16(4)},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2120,7 +2152,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u16(1), u16(2), "XXX", u16(4)},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2128,7 +2160,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u16(1), u16(2), u16(3), "XXX"},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2136,7 +2168,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u16(1), u16(2), u16(3), u16(4)},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2144,7 +2176,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2154,7 +2186,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{"XXX", u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2162,7 +2194,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{u16(1), "XXX", u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2170,7 +2202,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{u16(1), u16(2), "XXX", u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2178,7 +2210,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{u16(1), u16(2), u16(3), "XXX"},
 					}
-					Expect(OfuscateArr(u16s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2186,7 +2218,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{u16(1), u16(2), u16(3), u16(4)},
 					}
-					Expect(OfuscateArr(u16s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2194,7 +2226,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u16{u16(1), u16(2), u16(3), u16(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(u16s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(u16s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2206,7 +2238,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", i32(2), i32(3), i32(4)},
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2214,7 +2246,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i32(1), "XXX", i32(3), i32(4)},
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2222,7 +2254,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i32(1), i32(2), "XXX", i32(4)},
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2230,7 +2262,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i32(1), i32(2), i32(3), "XXX"},
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2238,7 +2270,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i32(1), i32(2), i32(3), i32(4)},
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2246,7 +2278,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2256,7 +2288,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 						[]any{"XXX", i32(2), i32(3), i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2264,7 +2296,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 						[]any{i32(1), "XXX", i32(3), i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2272,7 +2304,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 						[]any{i32(1), i32(2), "XXX", i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2280,7 +2312,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 						[]any{i32(1), i32(2), i32(3), "XXX"},
 					}
-					Expect(OfuscateArr(i32s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2288,7 +2320,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 						[]any{i32(1), i32(2), i32(3), i32(4)},
 					}
-					Expect(OfuscateArr(i32s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2296,7 +2328,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i32{i32(1), i32(2), i32(3), i32(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(i32s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(i32s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2308,7 +2340,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", u32(2), u32(3), u32(4)},
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2316,7 +2348,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u32(1), "XXX", u32(3), u32(4)},
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2324,7 +2356,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u32(1), u32(2), "XXX", u32(4)},
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2332,7 +2364,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u32(1), u32(2), u32(3), "XXX"},
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2340,7 +2372,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u32(1), u32(2), u32(3), u32(4)},
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2348,7 +2380,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2358,7 +2390,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 						[]any{"XXX", u32(2), u32(3), u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2366,7 +2398,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 						[]any{u32(1), "XXX", u32(3), u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2374,7 +2406,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 						[]any{u32(1), u32(2), "XXX", u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2382,7 +2414,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 						[]any{u32(1), u32(2), u32(3), "XXX"},
 					}
-					Expect(OfuscateArr(u32s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2390,7 +2422,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 						[]any{u32(1), u32(2), u32(3), u32(4)},
 					}
-					Expect(OfuscateArr(u32s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2398,7 +2430,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u32{u32(1), u32(2), u32(3), u32(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(u32s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(u32s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2410,7 +2442,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", i64(2), i64(3), i64(4)},
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2418,7 +2450,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i64(1), "XXX", i64(3), i64(4)},
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2426,7 +2458,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i64(1), i64(2), "XXX", i64(4)},
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2434,7 +2466,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i64(1), i64(2), i64(3), "XXX"},
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2442,7 +2474,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{i64(1), i64(2), i64(3), i64(4)},
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2450,7 +2482,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2460,7 +2492,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 						[]any{"XXX", i64(2), i64(3), i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2468,7 +2500,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 						[]any{i64(1), "XXX", i64(3), i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2476,7 +2508,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 						[]any{i64(1), i64(2), "XXX", i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2484,7 +2516,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 						[]any{i64(1), i64(2), i64(3), "XXX"},
 					}
-					Expect(OfuscateArr(i64s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2492,7 +2524,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 						[]any{i64(1), i64(2), i64(3), i64(4)},
 					}
-					Expect(OfuscateArr(i64s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2500,7 +2532,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]i64{i64(1), i64(2), i64(3), i64(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(i64s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(i64s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2512,7 +2544,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", u64(2), u64(3), u64(4)},
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2520,7 +2552,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u64(1), "XXX", u64(3), u64(4)},
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2528,7 +2560,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u64(1), u64(2), "XXX", u64(4)},
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2536,7 +2568,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u64(1), u64(2), u64(3), "XXX"},
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2544,7 +2576,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{u64(1), u64(2), u64(3), u64(4)},
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2552,7 +2584,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2562,7 +2594,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 						[]any{"XXX", u64(2), u64(3), u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2570,7 +2602,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 						[]any{u64(1), "XXX", u64(3), u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2578,7 +2610,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 						[]any{u64(1), u64(2), "XXX", u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2586,7 +2618,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 						[]any{u64(1), u64(2), u64(3), "XXX"},
 					}
-					Expect(OfuscateArr(u64s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2594,7 +2626,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 						[]any{u64(1), u64(2), u64(3), u64(4)},
 					}
-					Expect(OfuscateArr(u64s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2602,7 +2634,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]u64{u64(1), u64(2), u64(3), u64(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(u64s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(u64s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2614,7 +2646,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", int(2), int(3), int(4)},
 						[]int{int(1), int(2), int(3), int(4)},
 					}
-					Expect(OfuscateArr(ints, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2622,7 +2654,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{int(1), "XXX", int(3), int(4)},
 						[]int{int(1), int(2), int(3), int(4)},
 					}
-					Expect(OfuscateArr(ints, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2630,7 +2662,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{int(1), int(2), "XXX", int(4)},
 						[]int{int(1), int(2), int(3), int(4)},
 					}
-					Expect(OfuscateArr(ints, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2638,7 +2670,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{int(1), int(2), int(3), "XXX"},
 						[]int{int(1), int(2), int(3), int(4)},
 					}
-					Expect(OfuscateArr(ints, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2646,7 +2678,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{int(1), int(2), int(3), int(4)},
 						[]int{int(1), int(2), int(3), int(4)},
 					}
-					Expect(OfuscateArr(ints, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2654,7 +2686,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]int{int(1), int(2), int(3), int(4)},
 					}
-					Expect(OfuscateArr(ints, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2664,7 +2696,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]int{int(1), int(2), int(3), int(4)},
 						[]any{"XXX", int(2), int(3), int(4)},
 					}
-					Expect(OfuscateArr(ints, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2672,7 +2704,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]int{int(1), int(2), int(3), int(4)},
 						[]any{int(1), "XXX", int(3), int(4)},
 					}
-					Expect(OfuscateArr(ints, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2680,7 +2712,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]int{int(1), int(2), int(3), int(4)},
 						[]any{int(1), int(2), "XXX", int(4)},
 					}
-					Expect(OfuscateArr(ints, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2688,7 +2720,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]int{int(1), int(2), int(3), int(4)},
 						[]any{int(1), int(2), int(3), "XXX"},
 					}
-					Expect(OfuscateArr(ints, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2696,7 +2728,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]int{int(1), int(2), int(3), int(4)},
 						[]any{int(1), int(2), int(3), int(4)},
 					}
-					Expect(OfuscateArr(ints, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2704,7 +2736,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]int{int(1), int(2), int(3), int(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(ints, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(ints, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2716,7 +2748,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", uint(2), uint(3), uint(4)},
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2724,7 +2756,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{uint(1), "XXX", uint(3), uint(4)},
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2732,7 +2764,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{uint(1), uint(2), "XXX", uint(4)},
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2740,7 +2772,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{uint(1), uint(2), uint(3), "XXX"},
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2748,7 +2780,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{uint(1), uint(2), uint(3), uint(4)},
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2756,7 +2788,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2766,7 +2798,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 						[]any{"XXX", uint(2), uint(3), uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2774,7 +2806,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 						[]any{uint(1), "XXX", uint(3), uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2782,7 +2814,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 						[]any{uint(1), uint(2), "XXX", uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2790,7 +2822,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 						[]any{uint(1), uint(2), uint(3), "XXX"},
 					}
-					Expect(OfuscateArr(uints, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2798,7 +2830,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 						[]any{uint(1), uint(2), uint(3), uint(4)},
 					}
-					Expect(OfuscateArr(uints, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2806,7 +2838,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]uint{uint(1), uint(2), uint(3), uint(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(uints, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(uints, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2818,7 +2850,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", f32(2), f32(3), f32(4)},
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2826,7 +2858,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{f32(1), "XXX", f32(3), f32(4)},
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2834,7 +2866,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{f32(1), f32(2), "XXX", f32(4)},
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2842,7 +2874,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{f32(1), f32(2), f32(3), "XXX"},
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2850,7 +2882,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{f32(1), f32(2), f32(3), f32(4)},
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2858,7 +2890,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2868,7 +2900,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 						[]any{"XXX", f32(2), f32(3), f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2876,7 +2908,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 						[]any{f32(1), "XXX", f32(3), f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2884,7 +2916,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 						[]any{f32(1), f32(2), "XXX", f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2892,7 +2924,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 						[]any{f32(1), f32(2), f32(3), "XXX"},
 					}
-					Expect(OfuscateArr(f32s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2900,7 +2932,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 						[]any{f32(1), f32(2), f32(3), f32(4)},
 					}
-					Expect(OfuscateArr(f32s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2908,7 +2940,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f32{f32(1), f32(2), f32(3), f32(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(f32s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(f32s, "[1][]")).To(Equal(result))
 				})
 			})
 		})
@@ -2920,7 +2952,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", f64(2), f64(3), f64(4)},
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[0][0]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[0][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2928,7 +2960,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{f64(1), "XXX", f64(3), f64(4)},
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[0][1]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[0][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2936,7 +2968,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{f64(1), f64(2), "XXX", f64(4)},
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[0][2]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[0][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2944,7 +2976,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{f64(1), f64(2), f64(3), "XXX"},
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[0][3]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[0][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -2952,7 +2984,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{f64(1), f64(2), f64(3), f64(4)},
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[0][4]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[0][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -2960,7 +2992,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[0][]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[0][]")).To(Equal(result))
 				})
 			})
 
@@ -2970,7 +3002,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 						[]any{"XXX", f64(2), f64(3), f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[1][0]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[1][0]")).To(Equal(result))
 				})
 
 				It("Ofuscating second child element", func() {
@@ -2978,7 +3010,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 						[]any{f64(1), "XXX", f64(3), f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[1][1]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[1][1]")).To(Equal(result))
 				})
 
 				It("Ofuscating third child element", func() {
@@ -2986,7 +3018,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 						[]any{f64(1), f64(2), "XXX", f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[1][2]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[1][2]")).To(Equal(result))
 				})
 
 				It("Ofuscating fourth child element", func() {
@@ -2994,7 +3026,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 						[]any{f64(1), f64(2), f64(3), "XXX"},
 					}
-					Expect(OfuscateArr(f64s, "[1][3]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[1][3]")).To(Equal(result))
 				})
 
 				It("Ofuscating Fifth child element, unexistent", func() {
@@ -3002,7 +3034,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 						[]any{f64(1), f64(2), f64(3), f64(4)},
 					}
-					Expect(OfuscateArr(f64s, "[1][4]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[1][4]")).To(Equal(result))
 				})
 
 				It("Ofuscating everything", func() {
@@ -3010,7 +3042,7 @@ var _ = Describe("OfuscateStruct", func() {
 						[]f64{f64(1), f64(2), f64(3), f64(4)},
 						[]any{"XXX", "XXX", "XXX", "XXX"},
 					}
-					Expect(OfuscateArr(f64s, "[1][]")).To(Equal(result))
+					Expect(Ofuscate(f64s, "[1][]")).To(Equal(result))
 				})
 			})
 		})

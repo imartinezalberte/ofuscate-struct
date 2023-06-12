@@ -15,7 +15,7 @@ var (
 	indexArrRegexp = regexp.MustCompile("\\[([0-9]{0,9})\\](.*)")
 )
 
-func OfuscateArr(input any, filter string) any {
+func Ofuscate(input any, filter string) any {
 	if input == nil {
 		return nil
 	}
@@ -45,7 +45,7 @@ func OfuscateArr(input any, filter string) any {
 					et == reflect.Map) && a != "" {
 					tmp[index] = Ofuscate(tmp[index], a)
 				} else if (et == reflect.Array || et == reflect.Slice) && next != "" {
-					tmp[index] = OfuscateArr(tmp[index], next)
+					tmp[index] = Ofuscate(tmp[index], next)
 				} else {
 					tmp[index] = "XXX"
 				}
@@ -56,7 +56,7 @@ func OfuscateArr(input any, filter string) any {
 					et == reflect.Map && a != "" {
 					tmp[i] = Ofuscate(tmp[i], a)
 				} else if (et == reflect.Array || et == reflect.Slice) && next != "" {
-					tmp[i] = OfuscateArr(tmp[i], next)
+					tmp[i] = Ofuscate(tmp[i], next)
 				} else {
 					tmp[i] = "XXX"
 				}
@@ -65,20 +65,13 @@ func OfuscateArr(input any, filter string) any {
 
 		return tmp
 	case reflect.Struct:
-		return Ofuscate(input, filter)
+		var m map[string]interface{}
+		mapstructure.Decode(input, &m)
+		DoOfuscate(m, filter)
+		return m
 	default:
 		return input
 	}
-}
-
-func Ofuscate(input any, filter string) (m map[string]interface{}) {
-	if k := reflect.TypeOf(input).Kind(); k == reflect.Array || k == reflect.Slice {
-		return
-	}
-
-	mapstructure.Decode(input, &m)
-	DoOfuscate(m, filter)
-	return m
 }
 
 // TODO: aggregate slicing capability, could be awesome
