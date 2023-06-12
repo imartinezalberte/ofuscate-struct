@@ -10,9 +10,72 @@ import (
 	"github.com/mitchellh/mapstructure"
 )
 
-var arrRegexp = regexp.MustCompile("([a-zA-Z0-9]+)\\[([0-9]*)\\]")
+var (
+	arrRegexp      = regexp.MustCompile("([a-zA-Z0-9]+)\\[([0-9]*)\\]")
+	indexArrRegexp = regexp.MustCompile("\\[([0-9]{0,9})\\](.*)")
+)
 
-func Ofuscate(input any, filter string) (m map[string]any) {
+func OfuscateArr(input any, filter string) any {
+	if input == nil {
+		return nil
+	}
+
+	v := reflect.ValueOf(input)
+	switch reflect.TypeOf(input).Kind() {
+	case reflect.Array, reflect.Slice:
+		// Create the array
+		tmp := make([]any, v.Len(), v.Len())
+
+		// Check if we have to something more about that
+		b, a, _ := strings.Cut(filter, ".")
+		if !strings.ContainsAny(b, "[]") && !indexArrRegexp.MatchString(b) {
+			return input
+		}
+
+		// Just ofuscate the following index
+		options := indexArrRegexp.FindStringSubmatch(b)
+		inside, next := options[1], join(".", options[2], a)
+		if index, err := strconv.Atoi(inside); err == nil {
+			for i := 0; i < len(tmp); i++ {
+				tmp[i] = v.Index(i).Interface()
+			}
+
+			if index < len(tmp) {
+				if et := reflect.TypeOf(input).Elem().Kind(); (et == reflect.Struct || et == reflect.Interface ||
+					et == reflect.Map) && a != "" {
+					tmp[index] = Ofuscate(tmp[index], a)
+				} else if (et == reflect.Array || et == reflect.Slice) && next != "" {
+					tmp[index] = OfuscateArr(tmp[index], next)
+				} else {
+					tmp[index] = "XXX"
+				}
+			}
+		} else { // Ofuscate the array
+			for i := 0; i < len(tmp); i++ {
+				if et := reflect.TypeOf(input).Elem().Kind(); et == reflect.Struct || et == reflect.Interface ||
+					et == reflect.Map && a != "" {
+					tmp[i] = Ofuscate(tmp[i], a)
+				} else if (et == reflect.Array || et == reflect.Slice) && next != "" {
+					tmp[i] = OfuscateArr(tmp[i], next)
+				} else {
+					tmp[i] = "XXX"
+				}
+			}
+		}
+
+		return tmp
+	case reflect.Struct:
+		return Ofuscate(input, filter)
+	default:
+		return input
+	}
+}
+
+func Ofuscate(input any, filter string) (m map[string]interface{}) {
+	if k := reflect.TypeOf(input).Kind(); k == reflect.Array || k == reflect.Slice {
+		return
+	}
+
 	mapstructure.Decode(input, &m)
 	DoOfuscate(m, filter)
 	return m
@@ -20,6 +83,10 @@ func Ofuscate(input any, filter string) (m map[string]any) {
 
 // TODO: aggregate slicing capability, could be awesome
 func DoOfuscate(input map[string]any, filter string) {
+	if strings.TrimSpace(filter) == "" {
+		return
+	}
+
 	actual, after, ok := strings.Cut(filter, ".")
 	if !ok { // last one
 		propertyName, possibleIndex, isArr := strings.Cut(actual, "[")
@@ -78,7 +145,7 @@ func ofuscateArr(m map[string]any, actual, after string) bool {
 
 			arr.Index(index).Set(reflect.ValueOf(mm)) // We set the new map to the actual index
 
-			m[options[1]] = arr.Interface()           // We recover the array
+			m[options[1]] = arr.Interface() // We recover the array
 			DoOfuscate(mm, after)
 		}
 	} else if len(options[1]) > 0 { // No index specified
@@ -112,7 +179,7 @@ func ofuscateArr(m map[string]any, actual, after string) bool {
 			for i := 0; i < arr.Len(); i++ {
 				DoOfuscate(m[options[1]].([]any)[i].(map[string]interface{}), after)
 			}
-		}	
+		}
 	}
 
 	return false
@@ -165,4 +232,14 @@ func copySlice(input reflect.Value) []any {
 	}
 
 	return tmp
+}
+
+func join(sep string, input ...string) string {
+	var r string
+	for _, s := range input {
+		if s = strings.TrimSpace(s); s != "" {
+			r += s + sep
+		}
+	}
+	return strings.TrimSuffix(r, sep)
 }
