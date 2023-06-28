@@ -54,9 +54,9 @@ func Ofuscate(input any, filter string) any {
 			for i := 0; i < len(tmp); i++ {
 				if et := reflect.TypeOf(input).Elem().Kind(); et == reflect.Struct || et == reflect.Interface ||
 					et == reflect.Map && a != "" {
-					tmp[i] = Ofuscate(tmp[i], a)
+					tmp[i] = Ofuscate(v.Index(i).Interface(), a)
 				} else if (et == reflect.Array || et == reflect.Slice) && next != "" {
-					tmp[i] = Ofuscate(tmp[i], next)
+					tmp[i] = Ofuscate(v.Index(i).Interface(), next)
 				} else {
 					tmp[i] = "XXX"
 				}
@@ -84,7 +84,9 @@ func DoOfuscate(input map[string]any, filter string) {
 	if !ok { // last one
 		propertyName, possibleIndex, isArr := strings.Cut(actual, "[")
 		if !isArr || possibleIndex == "]" {
-			input[propertyName] = "XXX"
+			if _, ok := input[propertyName]; ok {
+				input[propertyName] = "XXX"
+			}
 			return
 		}
 

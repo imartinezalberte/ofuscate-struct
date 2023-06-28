@@ -5,6 +5,7 @@ import (
 	. "github.com/onsi/gomega"
 
 	. "github.com/imartinezalberte/ofuscate-struct"
+	ofuscatestruct "github.com/imartinezalberte/ofuscate-struct"
 )
 
 type (
@@ -140,6 +141,25 @@ type (
 )
 
 var _ = Describe("OfuscateStruct", func() {
+	Context("Random things", func() {
+		When("Trying to ofuscate some attribute that is not inside of the struct", func() {
+			type a struct {
+				Something string
+			}
+
+			var input []a
+			BeforeEach(func() {
+				input = []a{{Something: "Hello"}, {Something: "Other"}}
+			})
+
+			It("is not found", func() {
+				Expect(
+					ofuscatestruct.Ofuscate(input, "[].Other"),
+				).Should(ContainElements(map[string]any{"Something": "Hello"}, map[string]any{"Something": "Other"}))
+			})
+		})
+	})
+
 	Context("case with A being only standard strings and one int", func() {
 		var input A
 
